@@ -1,22 +1,24 @@
 <html>
 <head>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         $(function(){
             var iosocket = io.connect();
             iosocket.on('connect', function () {
                 $('#incomingChatMessages').append($('<li>Connected</li>'));
-                iosocket.on('message', function(message) {
-                    $('#incomingChatMessages').append($('<li></li>').text(message));
+                	iosocket.on('message', function(message) {
+                    	$('#incomingChatMessages').append($('<li></li>').text(message));
                 });
                 iosocket.on('disconnect', function() {
                     $('#incomingChatMessages').append('<li>Disconnected</li>');
-                });
-								iosocket.on('datetime', function (data) {
-  								$("#clock").text(new Date(data));
-								});
+                });				
             });
+			
+			iosocket.on('datetime', function (data) {  
+    			$('#clock').text(data);
+			});
+		
             $('#outgoingChatMessage').keypress(function(event) {
                 if(event.which == 13) {
                     event.preventDefault();
@@ -29,7 +31,7 @@
     </script>
 </head>
 <body>
-<p id="clock">Time: </p>
+<p id="clock"></p> 
 Incoming Chat: <ul id="incomingChatMessages"></ul>
 <br />
 <input type="text" id="outgoingChatMessage">

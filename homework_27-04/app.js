@@ -12,13 +12,24 @@ var server = http.createServer(function(req, res) {
 socketio.listen(server).on('connection', function (socket) {
     socket.on('message', function (msg) {
         console.log('Message Received: ', msg);
-        socket.emit('message', msg);
-    });
+		try{
+			var result = eval(msg);
+        	socket.emit('message', result);
+		}catch(e){
+			socket.emit('message',msg);
+		}
+    });	
 	
-	setInterval(function(){
-		socket.on('datetime', function (socket) {
-  			socket.emit('datetime', { datetime: new Date().getTime() });
-		});
+	setInterval(function(){	
+		var d = new Date();
+	    var h = d.getHours();
+	    var m = d.getMinutes();
+	    var s = d.getSeconds();
+	    var hms = h+":"+m+":"+s;
+		socket.emit('datetime',hms);
+		//socket.emit('datetime', { datetime: new Date().getTime() });	
 	},1000);
-	
+
 });
+
+
