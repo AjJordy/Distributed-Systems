@@ -13,12 +13,10 @@
                 iosocket.on('disconnect', function() {
                     $('#incomingChatMessages').append('<li>Disconnected</li>');
                 });				
-            });
-			
+            });			
 			iosocket.on('datetime', function (data) {  
     			$('#clock').text(data);
-			});
-		
+			});		
             $('#outgoingChatMessage').keypress(function(event) {
                 if(event.which == 13) {
                     event.preventDefault();

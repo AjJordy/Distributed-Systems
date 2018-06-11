@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<script src="server_chat.js" type="text/javascript"></script>
+  	<title>Bate-papo ajax</title>
+  </head>
+  <body onload="carrega_mensagens('mural',0)">
+    <div style="width:700px; height:400px; overflow: auto;" id="mural"></div>
+    <br/>
+    Nome: <input type="text" size="10" id="nome">
+    Mensagem: <input type="text" size="30" id="mensagem">
+    <input type="button" value="Enviar" onclick="submete_mensagem('nome', 'mensagem')">
+  </body>
+</html>
